@@ -183,7 +183,11 @@ namespace RestSharp.Deserializers
             return list;
         }
 
+#if NET20
+        private object ConvertValue(Type typeInfo, object value)
+#else
         private object ConvertValue(TypeInfo typeInfo, object value)
+#endif
         {
             string stringValue = Convert.ToString(value, Culture);
 

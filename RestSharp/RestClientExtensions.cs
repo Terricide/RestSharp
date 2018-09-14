@@ -143,6 +143,7 @@ namespace RestSharp
             return client.ExecuteAsync(request, callback);
         }
 
+#if !NET20
         public static RestResponse<dynamic> ExecuteDynamic(this IRestClient client, IRestRequest request)
         {
             IRestResponse<dynamic> response = client.Execute<dynamic>(request);
@@ -153,6 +154,7 @@ namespace RestSharp
 
             return generic;
         }
+#endif
 
         public static Task<T> GetTaskAsync<T>(this IRestClient client, IRestRequest request) where T : new()
         {

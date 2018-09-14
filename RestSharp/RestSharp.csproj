@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net452;net20</TargetFrameworks>
     <PackageReleaseNotes>For full release notes see https://github.com/restsharp/RestSharp/blob/master/releasenotes.md</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/restsharp/RestSharp/develop/restsharp.png</PackageIconUrl>
     <PackageLicenseUrl>https://github.com/restsharp/RestSharp/blob/master/LICENSE.txt</PackageLicenseUrl>
@@ -15,12 +15,14 @@
     <UpdateVersionProperties>true</UpdateVersionProperties>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="4.0.0-beta*">
+    <PackageReference Include="GitVersionTask" Version="4.0.0-beta*" Condition="'$(TargetFramework)' != 'net20'">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web" Condition="'$(TargetFramework)' == 'net452'" />
+    <Reference Include="System.Web" Condition="'$(TargetFramework)' == 'net20'" />
+    <Reference Include="..\\Lib\\MonoLib.dll" Condition="'$(TargetFramework)' == 'net20'" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />

@@ -74,7 +74,11 @@ namespace RestSharp.Extensions
             return false;
         }
 
+#if NET20
+        public static object ChangeType(this object source, Type newType)
+#else
         public static object ChangeType(this object source, TypeInfo newType)
+#endif
         {
             return Convert.ChangeType(source, newType.AsType());
         }
