@@ -208,8 +208,11 @@ namespace RestSharp
             
             AppendHeaders(webRequest);
             AppendCookies(webRequest);
-
+#if NET20
+            if (Host != null) webRequest.Headers["Host"] = Host;
+#else
             if (Host != null) webRequest.Host = Host;
+#endif
 
             webRequest.Method = method;
 
@@ -250,7 +253,11 @@ namespace RestSharp
             if (FollowRedirects && MaxRedirects.HasValue)
                 webRequest.MaximumAutomaticRedirections = MaxRedirects.Value;
 
+#if NET20
+            ServicePointManager.ServerCertificateValidationCallback = RemoteCertificateValidationCallback;
+#else
             webRequest.ServerCertificateValidationCallback = RemoteCertificateValidationCallback;
+#endif
 
             webRequest.ConnectionGroupName = ConnectionGroupName;
 

@@ -245,13 +245,16 @@ namespace RestSharp
         {
             restrictedHeaderActions.Add("Accept", (r, v) => r.Accept = v);
             restrictedHeaderActions.Add("Content-Type", (r, v) => r.ContentType = v);
+#if !NET20
             restrictedHeaderActions.Add("Date", (r, v) =>
             {
                 if (DateTime.TryParse(v, out var parsed))
                     r.Date = parsed;
             });
-
             restrictedHeaderActions.Add("Host", (r, v) => r.Host = v);
+#else
+            restrictedHeaderActions.Add("Host", (r, v) => r.Headers["Host"] = v);
+#endif
 
             restrictedHeaderActions.Add("Range", AddRange);
         }

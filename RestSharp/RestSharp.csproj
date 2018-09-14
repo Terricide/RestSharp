@@ -21,7 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web" Condition="'$(TargetFramework)' == 'net452'" />
-    <Reference Include="System.Web" Condition="'$(TargetFramework)' == 'net20'" />
+    <Reference Include="..\\Lib\\System.Web.dll" Condition="'$(TargetFramework)' == 'net20'" />
     <Reference Include="..\\Lib\\MonoLib.dll" Condition="'$(TargetFramework)' == 'net20'" />
   </ItemGroup>
   <ItemGroup>
